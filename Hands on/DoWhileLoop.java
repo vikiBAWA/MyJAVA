@@ -1,3 +1,9 @@
+/*
+ Program to Demonstarte do-while and print reverse counting
+ Name: Vikram Shinde
+ Date: 12.10.2022
+*/
+
 package loops;
 
 import java.util.Scanner;

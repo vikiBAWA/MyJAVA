@@ -1,3 +1,9 @@
+/*
+ Program to Demonstarte while loop countinues until entered number is positive
+ Name: Vikram Shinde
+ Date: 12.10.2022
+ */
+
 package loops;
 
 import java.util.Scanner;

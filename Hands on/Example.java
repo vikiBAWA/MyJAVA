@@ -1,7 +1,7 @@
-package diyaapp;
+package nullpointer;
 import  java.util.*;
 
-class Example
+class NullPointerException
 {
 	public static void main (String[] args)
 	{

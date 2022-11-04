@@ -14,7 +14,7 @@ import java.util.*;
 		
 		// Creating an object of TreeSets class
 		TreeSet<Integer> obj = new TreeSet<>();
-	      
+		 // use add() method to add values 
 		   // Add numbers in the Queue
 		   obj.add(11);
 		   obj.add(22);
@@ -25,6 +25,7 @@ import java.util.*;
 		   obj.add(77);
 		   obj.add(88);
 		   obj.add(99);
+		   //Printing Original Treeset
 		   System.out.println("Original TreeSet: "+obj);
 		   System.out.print("Enter a number: ");
 		   int num = sc.nextInt();

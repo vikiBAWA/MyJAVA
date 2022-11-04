@@ -9,7 +9,7 @@ class Code1 {
 
 		public static void main(String args[]) {
 			ArrayList<String>  Brands = new ArrayList<String>();
-
+			 // use add() method to add values 
 			Brands.add("BMW");
 			Brands.add("Google");
 			Brands.add("Facebook");

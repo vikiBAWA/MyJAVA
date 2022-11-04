@@ -12,6 +12,7 @@ class Code2 {
 		Scanner sc = new Scanner(System.in);
 		
 		LinkedList <String> Name = new LinkedList <String> ();
+		 // use add() method to add values 
 		Name.add("SANJEET");
 		Name.add("SHREEYASH");
 		Name.add("LOKESH");
@@ -19,7 +20,7 @@ class Code2 {
 		Name.add("VAIBHAV");
 		Name.add("HITESH");
 		
-		
+		//Printing Student Name
         System.out.print("Enter a Student name :");
         String Group = sc.nextLine();
         sc.close();

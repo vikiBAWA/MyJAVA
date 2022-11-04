@@ -1,4 +1,4 @@
-package diyaapp;
+package arraybound;
 //import  java.util.*;
 
 //array index out of bound

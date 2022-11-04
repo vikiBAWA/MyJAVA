@@ -12,7 +12,8 @@ class Code5 {
 		
 		// Creating an object of PriorityQueue class
 				PriorityQueue<Integer> num = new PriorityQueue<>(Collections.reverseOrder());
-				   // Add numbers in the Queue
+				 // use add() method to add values    
+				// Add numbers in the Queue
 				   num.add(11);
 				   num.add(22);
 				   num.add(33);

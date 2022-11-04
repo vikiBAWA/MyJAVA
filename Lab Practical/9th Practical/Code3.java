@@ -1,5 +1,5 @@
 /* write a java program to compare two sets and retain elements which are same on both sets.(Using retainAll method)
- * Name : Masud Sayyed
+ * Name : Vikram Shinde
  * Date : 03-11-22
  */
 

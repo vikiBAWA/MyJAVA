@@ -1,0 +1,234 @@
+mysql> --MYSQL is a relational database management system on the Structured Query Language:
+    -> --MYSQL creates database that allows you to build many tables to store and manipulate data and defining the relationship between each table.
+    -> --datatypes:int,bigint,varchar(40),float(m,d):m=length,d=number of decimal,double(m,d),bool/boolean.
+    -> --datatypes:datetime('yyyy-mm-dd''hh:mm:ss')
+    -> ------create databse------
+    -> create database studentdb;
+mysql> create database studentdb;
+Query OK, 1 row affected (0.02 sec)
+
+mysql> create database ANPC2551;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| anju               |
+| anpc2551           |
+| db                 |
+| demo               |
+| hibernate_db       |
+| information_schema |
+| java               |
+| jwtdb              |
+| mysql              |
+| performance_schema |
+| sakila             |
+| security           |
+| springhibernate    |
+| studentdb          |
+| studentmanagement  |
+| sys                |
+| world              |
++--------------------+
+17 rows in set (0.05 sec)
+
+mysql> use studentdb;
+Database changed
+mysql> --creating table in studentdb:
+    -> create table student(
+    -> id int not null auto_increment,
+    -> name varchar(20) not null,
+    -> age int not null,
+    -> primary key(id)
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '--creating table in studentdb:
+create table student(
+id int not null auto_increm' at line 1
+mysql> create table student(
+    -> id int not null auto_increment,
+    -> name varchar(20) not null,
+    -> age int not null,
+    -> primary key(id)
+    -> );
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> show tables;
++---------------------+
+| Tables_in_studentdb |
++---------------------+
+| student             |
++---------------------+
+1 row in set (0.02 sec)
+
+mysql> desc student;
++-------+-------------+------+-----+---------+----------------+
+| Field | Type        | Null | Key | Default | Extra          |
++-------+-------------+------+-----+---------+----------------+
+| id    | int         | NO   | PRI | NULL    | auto_increment |
+| name  | varchar(20) | NO   |     | NULL    |                |
+| age   | int         | NO   |     | NULL    |                |
++-------+-------------+------+-----+---------+----------------+
+3 rows in set (0.01 sec)
+
+mysql> insert into student(id,name,age)values(1,'anju',27);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into student values(1,'anju',27);
+ERROR 1062 (23000): Duplicate entry '1' for key 'student.PRIMARY'
+mysql> insert into student values(2,'anju',27);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into student values('anju',27);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> select * from student;
++----+------+-----+
+| id | name | age |
++----+------+-----+
+|  1 | anju |  27 |
+|  2 | anju |  27 |
++----+------+-----+
+2 rows in set (0.00 sec)
+
+mysql> update student set name='manju' where id=2;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from student;
++----+-------+-----+
+| id | name  | age |
++----+-------+-----+
+|  1 | anju  |  27 |
+|  2 | manju |  27 |
++----+-------+-----+
+2 rows in set (0.00 sec)
+
+mysql> update student set name='raj',age=29 where id=1;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from student;
++----+-------+-----+
+| id | name  | age |
++----+-------+-----+
+|  1 | raj   |  29 |
+|  2 | manju |  27 |
++----+-------+-----+
+2 rows in set (0.00 sec)
+
+mysql> alter table student add address varchar(40) not null;
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc student;
++---------+-------------+------+-----+---------+----------------+
+| Field   | Type        | Null | Key | Default | Extra          |
++---------+-------------+------+-----+---------+----------------+
+| id      | int         | NO   | PRI | NULL    | auto_increment |
+| name    | varchar(20) | NO   |     | NULL    |                |
+| age     | int         | NO   |     | NULL    |                |
+| address | varchar(40) | NO   |     | NULL    |                |
++---------+-------------+------+-----+---------+----------------+
+4 rows in set (0.01 sec)
+
+mysql> select * from student;
++----+-------+-----+---------+
+| id | name  | age | address |
++----+-------+-----+---------+
+|  1 | raj   |  29 |         |
+|  2 | manju |  27 |         |
++----+-------+-----+---------+
+2 rows in set (0.00 sec)
+
+mysql> update student set address='xyz'where id=1;
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from student;
++----+-------+-----+---------+
+| id | name  | age | address |
++----+-------+-----+---------+
+|  1 | raj   |  29 | xyz     |
+|  2 | manju |  27 |         |
++----+-------+-----+---------+
+2 rows in set (0.00 sec)
+
+mysql> update student set address='abc' where id=2;
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from student;
++----+-------+-----+---------+
+| id | name  | age | address |
++----+-------+-----+---------+
+|  1 | raj   |  29 | xyz     |
+|  2 | manju |  27 | abc     |
++----+-------+-----+---------+
+2 rows in set (0.00 sec)
+
+mysql> alter table student modify address varchar(50) null;
+Query OK, 0 rows affected (0.08 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc student;
++---------+-------------+------+-----+---------+----------------+
+| Field   | Type        | Null | Key | Default | Extra          |
++---------+-------------+------+-----+---------+----------------+
+| id      | int         | NO   | PRI | NULL    | auto_increment |
+| name    | varchar(20) | NO   |     | NULL    |                |
+| age     | int         | NO   |     | NULL    |                |
+| address | varchar(50) | YES  |     | NULL    |                |
++---------+-------------+------+-----+---------+----------------+
+4 rows in set (0.01 sec)
+
+mysql> alter table student drop column address;
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc student;
++-------+-------------+------+-----+---------+----------------+
+| Field | Type        | Null | Key | Default | Extra          |
++-------+-------------+------+-----+---------+----------------+
+| id    | int         | NO   | PRI | NULL    | auto_increment |
+| name  | varchar(20) | NO   |     | NULL    |                |
+| age   | int         | NO   |     | NULL    |                |
++-------+-------------+------+-----+---------+----------------+
+3 rows in set (0.01 sec)
+
+mysql> alter table student rename to studentrecord;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc student;
+ERROR 1146 (42S02): Table 'studentdb.student' doesn't exist
+mysql> desc studentrecord;
++-------+-------------+------+-----+---------+----------------+
+| Field | Type        | Null | Key | Default | Extra          |
++-------+-------------+------+-----+---------+----------------+
+| id    | int         | NO   | PRI | NULL    | auto_increment |
+| name  | varchar(20) | NO   |     | NULL    |                |
+| age   | int         | NO   |     | NULL    |                |
++-------+-------------+------+-----+---------+----------------+
+3 rows in set (0.00 sec)
+
+mysql> delete from studentrecord where id=2;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from studentrecord;
++----+------+-----+
+| id | name | age |
++----+------+-----+
+|  1 | raj  |  29 |
++----+------+-----+
+1 row in set (0.00 sec)
+
+mysql> drop table studentrecord;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> select * from studentrecord;
+ERROR 1146 (42S02): Table 'studentdb.studentrecord' doesn't exist
+mysql> show tables;
+Empty set (0.00 sec)
+
+mysql> --delete command is used to remove particular record from the table.
+    -> --drop command is used to delete/remove the entire schema/structure of the table or database.

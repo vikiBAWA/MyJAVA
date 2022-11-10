@@ -1,0 +1,534 @@
+mysql> create database Atlas;
+Query OK, 1 row affected (0.66 sec)
+
+mysql> use Atlas;
+Database changed
+
+mysql> create table employee(
+    -> id int not null auto_increment,
+    -> name varchar(20) not null,
+    -> position varchar(15) not null,
+    -> salary int not null,
+    -> primary key(id)
+    -> );
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> desc employee;
++----------+-------------+------+-----+---------+----------------+
+| Field    | Type        | Null | Key | Default | Extra          |
++----------+-------------+------+-----+---------+----------------+
+| id       | int         | NO   | PRI | NULL    | auto_increment |
+| name     | varchar(20) | NO   |     | NULL    |                |
+| position | varchar(15) | NO   |     | NULL    |                |
+| salary   | int         | NO   |     | NULL    |                |
++----------+-------------+------+-----+---------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> insert into employee (name, position, salary) values ('Pranay', 'associate', 25000);
+Query OK, 1 row affected (0.68 sec)
+
+mysql> select id=1 from employee;
++------+
+| id=1 |
++------+
+|    1 |
++------+
+1 row in set (0.00 sec)
+
+mysql> select * from employee;
++----+--------+-----------+--------+
+| id | name   | position  | salary |
++----+--------+-----------+--------+
+|  1 | Pranay | associate |  25000 |
++----+--------+-----------+--------+
+1 row in set (0.00 sec)
+
+mysql> insert into employee values (2,'Gaurav', 'manager', 125000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from employee;
++----+--------+-----------+--------+
+| id | name   | position  | salary |
++----+--------+-----------+--------+
+|  1 | Pranay | associate |  25000 |
+|  2 | Gaurav | manager   | 125000 |
++----+--------+-----------+--------+
+2 rows in set (0.00 sec)
+
+mysql> insert into employee (name, position, salary) values ('Adarsh', 'co-worker', 20000);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> select id from employee;
++----+
+| id |
++----+
+|  1 |
+|  2 |
+|  3 |
++----+
+3 rows in set (0.00 sec)
+
+mysql> select * from employee;
++----+--------+-----------+--------+
+| id | name   | position  | salary |
++----+--------+-----------+--------+
+|  1 | Pranay | associate |  25000 |
+|  2 | Gaurav | manager   | 125000 |
+|  3 | Adarsh | co-worker |  20000 |
++----+--------+-----------+--------+
+3 rows in set (0.00 sec)
+
+mysql> insert into employee (name, position, salary) values ('Bhakti', 'associate', 25000);
+Query OK, 1 row affected (0.62 sec)
+
+mysql> insert into employee (name, position, salary) values ('Vikram', 'Worker', 24000);
+Query OK, 1 row affected (0.33 sec)
+
+mysql> insert into employee (name, position, salary) values ('Manoj', 'HR', 30000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from employee;
++----+--------+-----------+--------+
+| id | name   | position  | salary |
++----+--------+-----------+--------+
+|  1 | Pranay | associate |  25000 |
+|  2 | Gaurav | manager   | 125000 |
+|  3 | Adarsh | co-worker |  20000 |
+|  4 | Bhakti | associate |  25000 |
+|  5 | Vikram | Worker    |  24000 |
+|  6 | Manoj  | HR        |  30000 |
++----+--------+-----------+--------+
+6 rows in set (0.00 sec)
+
+mysql> update employee set name='Rehan' where id=4;
+Query OK, 1 row affected (0.72 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select 4 from employee;
++---+
+| 4 |
++---+
+| 4 |
+| 4 |
+| 4 |
+| 4 |
+| 4 |
+| 4 |
++---+
+6 rows in set (0.00 sec)
+
+mysql> select * from employee;
++----+--------+-----------+--------+
+| id | name   | position  | salary |
++----+--------+-----------+--------+
+|  1 | Pranay | associate |  25000 |
+|  2 | Gaurav | manager   | 125000 |
+|  3 | Adarsh | co-worker |  20000 |
+|  4 | Rehan  | associate |  25000 |
+|  5 | Vikram | Worker    |  24000 |
+|  6 | Manoj  | HR        |  30000 |
++----+--------+-----------+--------+
+6 rows in set (0.00 sec)
+
+mysql> update employee set name='Dawood', position='worker', salary=26000 where id=5;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from employee;
++----+--------+-----------+--------+
+| id | name   | position  | salary |
++----+--------+-----------+--------+
+|  1 | Pranay | associate |  25000 |
+|  2 | Gaurav | manager   | 125000 |
+|  3 | Adarsh | co-worker |  20000 |
+|  4 | Rehan  | associate |  25000 |
+|  5 | Dawood | worker    |  26000 |
+|  6 | Manoj  | HR        |  30000 |
++----+--------+-----------+--------+
+6 rows in set (0.00 sec)
+
+mysql> alter table employee add location varchar(70) not null;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc employee;
++----------+-------------+------+-----+---------+----------------+
+| Field    | Type        | Null | Key | Default | Extra          |
++----------+-------------+------+-----+---------+----------------+
+| id       | int         | NO   | PRI | NULL    | auto_increment |
+| name     | varchar(20) | NO   |     | NULL    |                |
+| position | varchar(15) | NO   |     | NULL    |                |
+| salary   | int         | NO   |     | NULL    |                |
+| location | varchar(70) | NO   |     | NULL    |                |
++----------+-------------+------+-----+---------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> alter table employee modify location varchar(50);
+Query OK, 6 rows affected (0.03 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+mysql> desc employee;
++----------+-------------+------+-----+---------+----------------+
+| Field    | Type        | Null | Key | Default | Extra          |
++----------+-------------+------+-----+---------+----------------+
+| id       | int         | NO   | PRI | NULL    | auto_increment |
+| name     | varchar(20) | NO   |     | NULL    |                |
+| position | varchar(15) | NO   |     | NULL    |                |
+| salary   | int         | NO   |     | NULL    |                |
+| location | varchar(50) | YES  |     | NULL    |                |
++----------+-------------+------+-----+---------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> update employee set location='Ulhasnagar' where id=2;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from employee;
++----+--------+-----------+--------+------------+
+| id | name   | position  | salary | location   |
++----+--------+-----------+--------+------------+
+|  1 | Pranay | associate |  25000 |            |
+|  2 | Gaurav | manager   | 125000 | Ulhasnagar |
+|  3 | Adarsh | co-worker |  20000 |            |
+|  4 | Rehan  | associate |  25000 |            |
+|  5 | Dawood | worker    |  26000 |            |
+|  6 | Manoj  | HR        |  30000 |            |
++----+--------+-----------+--------+------------+
+6 rows in set (0.00 sec)
+
+mysql> alter table employee modify location varchar(20) not null;
+Query OK, 6 rows affected (0.02 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+mysql> select * from employee;
++----+--------+-----------+--------+------------+
+| id | name   | position  | salary | location   |
++----+--------+-----------+--------+------------+
+|  1 | Pranay | associate |  25000 |            |
+|  2 | Gaurav | manager   | 125000 | Ulhasnagar |
+|  3 | Adarsh | co-worker |  20000 |            |
+|  4 | Rehan  | associate |  25000 |            |
+|  5 | Dawood | worker    |  26000 |            |
+|  6 | Manoj  | HR        |  30000 |            |
++----+--------+-----------+--------+------------+
+6 rows in set (0.00 sec)
+
+mysql> desc employee;
++----------+-------------+------+-----+---------+----------------+
+| Field    | Type        | Null | Key | Default | Extra          |
++----------+-------------+------+-----+---------+----------------+
+| id       | int         | NO   | PRI | NULL    | auto_increment |
+| name     | varchar(20) | NO   |     | NULL    |                |
+| position | varchar(15) | NO   |     | NULL    |                |
+| salary   | int         | NO   |     | NULL    |                |
+| location | varchar(20) | NO   |     | NULL    |                |
++----------+-------------+------+-----+---------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> insert into employee (name, position, salary, location) values ('Lokesh', 'worker', 25000, 'Kalyan');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> select * from employee;
++----+--------+-----------+--------+------------+
+| id | name   | position  | salary | location   |
++----+--------+-----------+--------+------------+
+|  1 | Pranay | associate |  25000 |            |
+|  2 | Gaurav | manager   | 125000 | Ulhasnagar |
+|  3 | Adarsh | co-worker |  20000 |            |
+|  4 | Rehan  | associate |  25000 |            |
+|  5 | Dawood | worker    |  26000 |            |
+|  6 | Manoj  | HR        |  30000 |            |
+|  7 | Lokesh | worker    |  25000 | Kalyan     |
++----+--------+-----------+--------+------------+
+7 rows in set (0.00 sec)
+
+mysql> delete from employee where id=6;
+Query OK, 1 row affected (0.23 sec)
+
+mysql> select * from employee;
++----+--------+-----------+--------+------------+
+| id | name   | position  | salary | location   |
++----+--------+-----------+--------+------------+
+|  1 | Pranay | associate |  25000 |            |
+|  2 | Gaurav | manager   | 125000 | Ulhasnagar |
+|  3 | Adarsh | co-worker |  20000 |            |
+|  4 | Rehan  | associate |  25000 |            |
+|  5 | Dawood | worker    |  26000 |            |
+|  7 | Lokesh | worker    |  25000 | Kalyan     |
++----+--------+-----------+--------+------------+
+6 rows in set (0.00 sec)
+
+mysql> delete from employee location;
+Query OK, 6 rows affected (0.77 sec)
+
+mysql> select * from employee;
+Empty set (0.00 sec)
+
+mysql> show tables;
++-----------------+
+| Tables_in_atlas |
++-----------------+
+| employee        |
++-----------------+
+1 row in set (0.00 sec)
+
+mysql> desc employee;
++----------+-------------+------+-----+---------+----------------+
+| Field    | Type        | Null | Key | Default | Extra          |
++----------+-------------+------+-----+---------+----------------+
+| id       | int         | NO   | PRI | NULL    | auto_increment |
+| name     | varchar(20) | NO   |     | NULL    |                |
+| position | varchar(15) | NO   |     | NULL    |                |
+| salary   | int         | NO   |     | NULL    |                |
+| location | varchar(20) | NO   |     | NULL    |                |
++----------+-------------+------+-----+---------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from employee;
+Empty set (0.00 sec)
+
+mysql> insert into employee values (1,'manoj', 'manager', 120000, 'Vithalwadi');
+Query OK, 1 row affected (0.53 sec)
+
+mysql> select * from employee;
++----+-------+----------+--------+------------+
+| id | name  | position | salary | location   |
++----+-------+----------+--------+------------+
+|  1 | manoj | manager  | 120000 | Vithalwadi |
++----+-------+----------+--------+------------+
+1 row in set (0.00 sec)
+
+mysql> insert into employee values (2,'Vikram', 'Worker', 12000, 'Ambarnath');
+Query OK, 1 row affected (0.14 sec)
+
+mysql> select * from employee;
++----+--------+----------+--------+------------+
+| id | name   | position | salary | location   |
++----+--------+----------+--------+------------+
+|  1 | manoj  | manager  | 120000 | Vithalwadi |
+|  2 | Vikram | Worker   |  12000 | Ambarnath  |
++----+--------+----------+--------+------------+
+2 rows in set (0.00 sec)
+
+mysql> delete from employee where id=1;
+Query OK, 1 row affected (0.44 sec)
+
+mysql> select * from employee;
++----+--------+----------+--------+-----------+
+| id | name   | position | salary | location  |
++----+--------+----------+--------+-----------+
+|  2 | Vikram | Worker   |  12000 | Ambarnath |
++----+--------+----------+--------+-----------+
+1 row in set (0.00 sec)
+
+mysql> insert into employee values (1,'manoj', 'manager', 120000, 'Vithalwadi');
+Query OK, 1 row affected (0.39 sec)
+
+mysql> alter table employee add work_type varchar(20) not null;
+Query OK, 0 rows affected (0.84 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc employee;
++-----------+-------------+------+-----+---------+----------------+
+| Field     | Type        | Null | Key | Default | Extra          |
++-----------+-------------+------+-----+---------+----------------+
+| id        | int         | NO   | PRI | NULL    | auto_increment |
+| name      | varchar(20) | NO   |     | NULL    |                |
+| position  | varchar(15) | NO   |     | NULL    |                |
+| salary    | int         | NO   |     | NULL    |                |
+| location  | varchar(20) | NO   |     | NULL    |                |
+| work_type | varchar(20) | NO   |     | NULL    |                |
++-----------+-------------+------+-----+---------+----------------+
+6 rows in set (0.00 sec)
+
+mysql> create table customers(
+    -> First_name varchar(10) not null,
+    -> id int not null auto_increment,
+    -> primary key(id)
+    -> );
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> show tables;
++-----------------+
+| Tables_in_atlas |
++-----------------+
+| customers       |
+| employee        |
++-----------------+
+2 rows in set (0.00 sec)
+
+mysql> desc customers;
++------------+-------------+------+-----+---------+----------------+
+| Field      | Type        | Null | Key | Default | Extra          |
++------------+-------------+------+-----+---------+----------------+
+| First_name | varchar(10) | NO   |     | NULL    |                |
+| id         | int         | NO   | PRI | NULL    | auto_increment |
++------------+-------------+------+-----+---------+----------------+
+2 rows in set (0.00 sec)
+
+mysql> drop table customers;
+Query OK, 0 rows affected (0.66 sec)
+
+mysql> show tables;
++-----------------+
+| Tables_in_atlas |
++-----------------+
+| employee        |
++-----------------+
+1 row in set (0.00 sec)
+
+mysql> select * from employee;
++----+--------+----------+--------+------------+-----------+
+| id | name   | position | salary | location   | work_type |
++----+--------+----------+--------+------------+-----------+
+|  1 | manoj  | manager  | 120000 | Vithalwadi |           |
+|  2 | Vikram | Worker   |  12000 | Ambarnath  |           |
++----+--------+----------+--------+------------+-----------+
+2 rows in set (0.00 sec)
+
+mysql> update employee set name='Adarsh' where id=1;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from employee;
++----+--------+----------+--------+------------+-----------+
+| id | name   | position | salary | location   | work_type |
++----+--------+----------+--------+------------+-----------+
+|  1 | Adarsh | manager  | 120000 | Vithalwadi |           |
+|  2 | Vikram | Worker   |  12000 | Ambarnath  |           |
++----+--------+----------+--------+------------+-----------+
+2 rows in set (0.00 sec)
+
+mysql> update employee set work_type='work from home' where id=1;
+Query OK, 1 row affected (0.18 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from employee;
++----+--------+----------+--------+------------+----------------+
+| id | name   | position | salary | location   | work_type      |
++----+--------+----------+--------+------------+----------------+
+|  1 | Adarsh | manager  | 120000 | Vithalwadi | work from home |
+|  2 | Vikram | Worker   |  12000 | Ambarnath  |                |
++----+--------+----------+--------+------------+----------------+
+2 rows in set (0.00 sec)
+
+mysql> delete from employee where id=2;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from employee;
++----+--------+----------+--------+------------+----------------+
+| id | name   | position | salary | location   | work_type      |
++----+--------+----------+--------+------------+----------------+
+|  1 | Adarsh | manager  | 120000 | Vithalwadi | work from home |
++----+--------+----------+--------+------------+----------------+
+1 row in set (0.00 sec)
+
+mysql> alter table employee rename to employee_info;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> select * from employee_info;
++----+--------+----------+--------+------------+----------------+
+| id | name   | position | salary | location   | work_type      |
++----+--------+----------+--------+------------+----------------+
+|  1 | Adarsh | manager  | 120000 | Vithalwadi | work from home |
++----+--------+----------+--------+------------+----------------+
+1 row in set (0.00 sec)
+
+mysql> alter table employee_info drop column work_type;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from employee_info;
++----+--------+----------+--------+------------+
+| id | name   | position | salary | location   |
++----+--------+----------+--------+------------+
+|  1 | Adarsh | manager  | 120000 | Vithalwadi |
++----+--------+----------+--------+------------+
+1 row in set (0.00 sec)
+
+mysql> desc employee_info;
++----------+-------------+------+-----+---------+----------------+
+| Field    | Type        | Null | Key | Default | Extra          |
++----------+-------------+------+-----+---------+----------------+
+| id       | int         | NO   | PRI | NULL    | auto_increment |
+| name     | varchar(20) | NO   |     | NULL    |                |
+| position | varchar(15) | NO   |     | NULL    |                |
+| salary   | int         | NO   |     | NULL    |                |
+| location | varchar(20) | NO   |     | NULL    |                |
++----------+-------------+------+-----+---------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> drop table employee_info;
+Query OK, 0 rows affected (0.64 sec)
+
+mysql> show tables;
+Empty set (0.00 sec)
+
+mysql> create table amployees(
+    -> id int not null auto_increment,
+    -> Fname varchar(10) not null,
+    -> primary key(id)
+    -> );
+Query OK, 0 rows affected (0.79 sec)
+
+mysql> show tables;
++-----------------+
+| Tables_in_atlas |
++-----------------+
+| amployees       |
++-----------------+
+1 row in set (0.00 sec)
+
+mysql> alter table amployees rename to employees;
+Query OK, 0 rows affected (0.15 sec)
+
+mysql> show tables;
++-----------------+
+| Tables_in_atlas |
++-----------------+
+| employees       |
++-----------------+
+1 row in set (0.00 sec)
+
+mysql> insert into employees (Fname) values('adarsh');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from employees;
++----+--------+
+| id | Fname  |
++----+--------+
+|  1 | adarsh |
++----+--------+
+1 row in set (0.00 sec)
+
+mysql> drop table employees;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> show tables;
+Empty set (0.00 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| atlas              |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql> drop database atlas;
+Query OK, 0 rows affected (0.70 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+4 rows in set (0.00 sec)

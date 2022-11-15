@@ -1,0 +1,210 @@
+mysql> create database EarPhones;
+Query OK, 1 row affected (0.76 sec)
+
+mysql> use EarPhones;
+Database changed
+mysql> create table Sales(
+    -> id int not null auto_increment,
+    -> name varchar(20) not null,
+    -> sales_man varchar(15) not null,
+    -> primary key(id)
+    -> );
+Query OK, 0 rows affected (0.51 sec)
+
+mysql> create table customer(
+    -> id int not null auto_increment,
+    -> name varchar(20) not null,
+    -> customers_name varchar(15) not null,
+    -> primary key(id)
+    -> );
+Query OK, 0 rows affected (0.36 sec)
+
+mysql> desc Sales;
++-----------+-------------+------+-----+---------+----------------+
+| Field     | Type        | Null | Key | Default | Extra          |
++-----------+-------------+------+-----+---------+----------------+
+| id        | int         | NO   | PRI | NULL    | auto_increment |
+| name      | varchar(20) | NO   |     | NULL    |                |
+| sales_man | varchar(15) | NO   |     | NULL    |                |
++-----------+-------------+------+-----+---------+----------------+
+3 rows in set (0.00 sec)
+
+mysql> desc customer;
++----------------+-------------+------+-----+---------+----------------+
+| Field          | Type        | Null | Key | Default | Extra          |
++----------------+-------------+------+-----+---------+----------------+
+| id             | int         | NO   | PRI | NULL    | auto_increment |
+| name           | varchar(20) | NO   |     | NULL    |                |
+| customers_name | varchar(15) | NO   |     | NULL    |                |
++----------------+-------------+------+-----+---------+----------------+
+3 rows in set (0.00 sec)
+
+mysql> insert into Sales values(01, 'earpod', 'Manoj');
+Query OK, 1 row affected (0.58 sec)
+
+mysql> insert into Sales values(02, 'earphone', 'Vikram');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into Sales values(03, 'phone', 'Adarsh');
+Query OK, 1 row affected (0.23 sec)
+
+mysql> insert into Sales values(04, 'back cover', 'Lokesh');
+Query OK, 1 row affected (0.12 sec)
+
+mysql> insert into Sales values(05, 'Screen guard', 'Shivam');
+Query OK, 1 row affected (0.74 sec)
+
+mysql> insert into customer values(10, 'Screen guard', 'Gaurav');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into customer values(11, 'Speaker', 'Pranay');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into customer values(12, 'Television', 'Bhakti');
+Query OK, 1 row affected (0.61 sec)
+
+mysql> insert into customer values(13, 'earpod', 'Rehan');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into customer values(14, 'headphone', 'Rehan');
+Query OK, 1 row affected (0.10 sec)
+
+mysql> select * from Sales;
++----+--------------+-----------+
+| id | name         | sales_man |
++----+--------------+-----------+
+|  1 | earpod       | Manoj     |
+|  2 | earphone     | Vikram    |
+|  3 | phone        | Adarsh    |
+|  4 | back cover   | Lokesh    |
+|  5 | Screen guard | Shivam    |
++----+--------------+-----------+
+5 rows in set (0.00 sec)
+mysql> select * from customer;
++----+--------------+----------------+
+| id | name         | customers_name |
++----+--------------+----------------+
+| 10 | Screen guard | Gaurav         |
+| 11 | Speaker      | Pranay         |
+| 12 | Television   | Bhakti         |
+| 13 | earpod       | Rehan          |
+| 14 | headphone    | Rehan          |
++----+--------------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from Sales;
++----+--------------+-----------+
+| id | name         | sales_man |
++----+--------------+-----------+
+|  1 | earpod       | Manoj     |
+|  2 | earphone     | Vikram    |
+|  3 | phone        | Adarsh    |
+|  4 | back cover   | Lokesh    |
+|  5 | Screen guard | Shivam    |
++----+--------------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> select Sales.sales_man, customer.name, customer.customers_name from Sales
+    -> INNER JOIN customer
+    -> ON Sales.name=customer.name;
++-----------+--------------+----------------+
+| sales_man | name         | customers_name |
++-----------+--------------+----------------+
+| Shivam    | Screen guard | Gaurav         |
+| Manoj     | earpod       | Rehan          |
++-----------+--------------+----------------+
+2 rows in set (0.00 sec)
+
+mysql> select Sales.sales_man, customer.name, customer.customers_name from Sales
+    -> LEFT JOIN customer
+    -> ON Sales.name=customer.name;
++-----------+--------------+----------------+
+| sales_man | name         | customers_name |
++-----------+--------------+----------------+
+| Manoj     | earpod       | Rehan          |
+| Vikram    | NULL         | NULL           |
+| Adarsh    | NULL         | NULL           |
+| Lokesh    | NULL         | NULL           |
+| Shivam    | Screen guard | Gaurav         |
++-----------+--------------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> select Sales.sales_man, customer.name, customer.customers_name from Sales
+    -> RIGHT JOIN customer
+    -> ON Sales.name=customer.name;
++-----------+--------------+----------------+
+| sales_man | name         | customers_name |
++-----------+--------------+----------------+
+| Shivam    | Screen guard | Gaurav         |
+| NULL      | Speaker      | Pranay         |
+| NULL      | Television   | Bhakti         |
+| Manoj     | earpod       | Rehan          |
+| NULL      | headphone    | Rehan          |
++-----------+--------------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> select Sales.sales_man, customer.name, customer.customers_name from Sales
+    -> CROSS JOIN customer
+    -> ;
++-----------+--------------+----------------+
+| sales_man | name         | customers_name |
++-----------+--------------+----------------+
+| Shivam    | Screen guard | Gaurav         |
+| Lokesh    | Screen guard | Gaurav         |
+| Adarsh    | Screen guard | Gaurav         |
+| Vikram    | Screen guard | Gaurav         |
+| Manoj     | Screen guard | Gaurav         |
+| Shivam    | Speaker      | Pranay         |
+| Lokesh    | Speaker      | Pranay         |
+| Adarsh    | Speaker      | Pranay         |
+| Vikram    | Speaker      | Pranay         |
+| Manoj     | Speaker      | Pranay         |
+| Shivam    | Television   | Bhakti         |
+| Lokesh    | Television   | Bhakti         |
+| Adarsh    | Television   | Bhakti         |
+| Vikram    | Television   | Bhakti         |
+| Manoj     | Television   | Bhakti         |
+| Shivam    | earpod       | Rehan          |
+| Lokesh    | earpod       | Rehan          |
+| Adarsh    | earpod       | Rehan          |
+| Vikram    | earpod       | Rehan          |
+| Manoj     | earpod       | Rehan          |
+| Shivam    | headphone    | Rehan          |
+| Lokesh    | headphone    | Rehan          |
+| Adarsh    | headphone    | Rehan          |
+| Vikram    | headphone    | Rehan          |
+| Manoj     | headphone    | Rehan          |
++-----------+--------------+----------------+
+25 rows in set (0.00 sec)
+
+mysql> select * from customer FULL JOIN Sales;
++----+--------------+----------------+----+--------------+-----------+
+| id | name         | customers_name | id | name         | sales_man |
++----+--------------+----------------+----+--------------+-----------+
+| 14 | headphone    | Rehan          |  1 | earpod       | Manoj     |
+| 13 | earpod       | Rehan          |  1 | earpod       | Manoj     |
+| 12 | Television   | Bhakti         |  1 | earpod       | Manoj     |
+| 11 | Speaker      | Pranay         |  1 | earpod       | Manoj     |
+| 10 | Screen guard | Gaurav         |  1 | earpod       | Manoj     |
+| 14 | headphone    | Rehan          |  2 | earphone     | Vikram    |
+| 13 | earpod       | Rehan          |  2 | earphone     | Vikram    |
+| 12 | Television   | Bhakti         |  2 | earphone     | Vikram    |
+| 11 | Speaker      | Pranay         |  2 | earphone     | Vikram    |
+| 10 | Screen guard | Gaurav         |  2 | earphone     | Vikram    |
+| 14 | headphone    | Rehan          |  3 | phone        | Adarsh    |
+| 13 | earpod       | Rehan          |  3 | phone        | Adarsh    |
+| 12 | Television   | Bhakti         |  3 | phone        | Adarsh    |
+| 11 | Speaker      | Pranay         |  3 | phone        | Adarsh    |
+| 10 | Screen guard | Gaurav         |  3 | phone        | Adarsh    |
+| 14 | headphone    | Rehan          |  4 | back cover   | Lokesh    |
+| 13 | earpod       | Rehan          |  4 | back cover   | Lokesh    |
+| 12 | Television   | Bhakti         |  4 | back cover   | Lokesh    |
+| 11 | Speaker      | Pranay         |  4 | back cover   | Lokesh    |
+| 10 | Screen guard | Gaurav         |  4 | back cover   | Lokesh    |
+| 14 | headphone    | Rehan          |  5 | Screen guard | Shivam    |
+| 13 | earpod       | Rehan          |  5 | Screen guard | Shivam    |
+| 12 | Television   | Bhakti         |  5 | Screen guard | Shivam    |
+| 11 | Speaker      | Pranay         |  5 | Screen guard | Shivam    |
+| 10 | Screen guard | Gaurav         |  5 | Screen guard | Shivam    |
++----+--------------+----------------+----+--------------+-----------+
+25 rows in set (0.00 sec)
